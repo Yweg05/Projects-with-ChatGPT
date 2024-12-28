@@ -1,5 +1,6 @@
 
 '''
+
 Programa dun inventario dunha tienda que pode engadir, eliminar, modificar e buscar produtos.
 Tamén pode amosar todo o inventario e gárdase nun archivo .csv
 
