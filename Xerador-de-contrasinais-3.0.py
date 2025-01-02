@@ -15,10 +15,10 @@ from tkinter import ttk
 
 # Lista con todos os caracteres que se van usar aleatoriamente para os contrasinais
 caracteres = [
-    "abcdefghilmnñopqrstuvwxz",
-    "ABCDEFGHILMNÑOPQRSTUVWXZabcdefghilmnñopqrstuvwxz",
-    "12345678901234567890ABCDEFGHILMNÑOPQRSTUVWXZabcdefghilmnñopqrstuvwxz",
-    "._*@%¿?!-&._*@%¿?!-&12345678901234567890ABCDEFGHILMNÑOPQRSTUVWXZabcdefghilmnñopqrstuvwxz",
+    "abcdefghilmnñopqrstuvxz",
+    "ABCDEFGHILMNÑOPQRSTUVXZabcdefghilmnñopqrstuvxz",
+    "12345678901234567890ABCDEFGHILMNÑOPQRSTUVXZabcdefghilmnñopqrstuvxz",
+    "._*@%¿?!-&._*@%¿?!-&12345678901234567890ABCDEFGHILMNÑOPQRSTUVXZabcdefghilmnñopqrstuvxz",
 ]
 
 # Creación da ventana
