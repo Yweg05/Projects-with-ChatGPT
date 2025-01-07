@@ -24,7 +24,7 @@ caracteres = [
 # Creación da ventana
 ventana = tk.Tk()
 ventana.title("Contrasinais")
-ventana.geometry("500x500")
+ventana.geometry("450x300")
 
 
 # Creación da clase contrasinal
