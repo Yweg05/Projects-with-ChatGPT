@@ -3,6 +3,9 @@
 3ª versión do xerador de contraseñas, este fai o mesmo ca o anterior (engadir, eliminar, amosar todo, gardar e cargar).
 Ademais tamén ten moitas melloras polo medio e interfaz gráfica.
 
+Update: Añadín un método para poder recuperar e restaurar o último contrasinal eliminado.
+Só o último e ten que ser nesa execución do programa, se saes e gardas está perdido.
+
 By Migel.
 
 """
@@ -24,7 +27,7 @@ caracteres = [
 # Creación da ventana
 ventana = tk.Tk()
 ventana.title("Contrasinais")
-ventana.geometry("450x300")
+ventana.geometry("500x330")
 
 
 # Creación da clase contrasinal
