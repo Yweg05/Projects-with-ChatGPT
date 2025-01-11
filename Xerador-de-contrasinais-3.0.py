@@ -44,6 +44,7 @@ class Contrasinal:
     length = None
     name = None
     generated_password = None
+    popped_password = None
 
     # Creación das variables para o nome e o contrasinal
     def __init__(self, name="", contrasinal=""):
@@ -203,8 +204,9 @@ class Contrasinal:
     # Parte 4: Método que se usa nas partes 2 e 3 para gardar o contrasinal
     @staticmethod
     def confirm():
-        contrasinal = Contrasinal.generated_password
-        Contrasinal.all.append(Contrasinal(Contrasinal.name, contrasinal))
+        Contrasinal.all.append(
+            Contrasinal(Contrasinal.name, Contrasinal.generated_password)
+        )
 
         clean()
         l_e1 = tk.Label(ventana, text="").pack()
@@ -225,14 +227,15 @@ class Contrasinal:
         b_del = tk.Button(ventana, text="Eliminar", command=Contrasinal.delete2)
         b_del.grid(row=3, column=1, padx=5, pady=7)
 
-    # Parte 2: Elimina o contrasinal cos datos da parte 1
+    # Parte 2: Elimina o contrasinal cos datos da parte 1 e gardao para poderse recuperar
     @staticmethod
     def delete2():
         name = Contrasinal.e_del.get().capitalize()
 
         for index, x in enumerate(Contrasinal.all):
             if name == x.name:
-                del Contrasinal.all[index]
+                Contrasinal.popped_password = Contrasinal.all.pop(index)
+
                 clean()
                 l_e1 = tk.Label(ventana, text="").pack()
                 l_e2 = tk.Label(
@@ -247,6 +250,48 @@ class Contrasinal:
                 ventana, text="Non hai ningún contrasinal con ese nome"
             ).pack()
             b_menu.pack()
+
+    # Métodos para recuperar o último contrasinal eliminado
+    # Asegurarse de que quere recuperar
+    @staticmethod
+    def recover1():
+        if not Contrasinal.popped_password:
+            clean()
+            l_recover1 = tk.Label(ventana, text="").pack()
+            l_recover2 = tk.Label(
+                ventana, text="\nNon hai ningún contrasinal que recuperar\n\n"
+            ).pack()
+            b_menu.pack()
+            l_recover3 = tk.Label(
+                ventana,
+                text="\n\nSolo podes recuperar o último contrasinal\n eliminado nesta execución do programa",
+            ).pack()
+
+        else:
+            clean()
+            b_menu.grid(row=0, column=0, padx=25, pady=25)
+
+            l_recover0 = tk.Label(
+                ventana,
+                text=f"Quere recuperar o contrasinal '{Contrasinal.popped_password.name}'?  ",
+            )
+            l_recover0.grid(row=1, column=1, pady=5)
+
+            b_recover = tk.Button(
+                ventana, text="Recuperar", command=Contrasinal.recover2
+            )
+            b_recover.grid(row=2, column=1, pady=5)
+
+    # Confirmar recuperación e volver ó menú
+    @staticmethod
+    def recover2():
+        clean()
+        l_recover1 = tk.Label(
+            ventana, text="Contrasinal recuperado exitosamente"
+        ).pack()
+        b_menu.pack()
+        Contrasinal.all.append(Contrasinal.popped_password)
+        Contrasinal.popped_password = None
 
     # Método estático para amosar todos os contrasinais
     @staticmethod
@@ -293,13 +338,20 @@ def menu():
     )
     b_del.grid(row=2, column=1, padx=25, pady=5)
 
+    b_rec = tk.Button(
+        ventana,
+        text="Recuperar o último contrasinal eliminado",
+        command=Contrasinal.recover1,
+    )
+    b_rec.grid(row=3, column=1, padx=25, pady=5)
+
     b_show = tk.Button(
         ventana, text="Amosar todos os contrasinais", command=Contrasinal.show
     )
-    b_show.grid(row=3, column=1, padx=25, pady=5)
+    b_show.grid(row=4, column=1, padx=25, pady=5)
 
     b_exit = tk.Button(ventana, text="Gardar e saír", command=exit1)
-    b_exit.grid(row=4, column=1, padx=25, pady=5)
+    b_exit.grid(row=5, column=1, padx=25, pady=5)
 
 
 # Función para limpar a pantalla de widgets
