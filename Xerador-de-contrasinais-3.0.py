@@ -129,55 +129,68 @@ class Contrasinal:
                 b_menu.pack()
                 break
         else:
-            try:
-                length = int(length)
-                security = int(security) - 1
+            if any(x == "" for x in [name, security]):
+                clean()
 
-                if 0 < length < 26:
-                    material = caracteres[security]
-                    Contrasinal.generated_password = Contrasinal.create_password(
-                        material, length
-                    )
-                    Contrasinal.material = material
-                    Contrasinal.length = length
-                    Contrasinal.name = name
+                l_e1 = tk.Label(ventana, text="").pack()
+                l_e2 = tk.Label(ventana, text="Non deixe ningún oco baleiro").pack()
+                b_menu.pack()
 
-                    clean()
-                    b_menu.grid(row=0, column=0, padx=25, pady=25)
+            else:
 
-                    l_add0 = tk.Label(ventana, text="").grid(row=1, column=1, pady=2)
-                    l_add1 = tk.Label(
-                        ventana,
-                        text=f"O contrasinal xerado é {Contrasinal.generated_password}",
-                    )
-                    l_add1.grid(row=2, column=1, columnspan=2, pady=5, padx=10)
+                try:
+                    length = int(length)
+                    security = int(security) - 1
 
-                    b_add1 = tk.Button(
-                        ventana,
-                        text="Confirmar contrasinal",
-                        command=Contrasinal.confirm,
-                    )
-                    b_add1.grid(row=3, column=1, pady=3, padx=1)
-                    b_add2 = tk.Button(
-                        ventana, text="Xerar unha nova", command=Contrasinal.create_loop
-                    )
-                    b_add2.grid(row=3, column=2, pady=3, padx=1)
+                    if 0 < length < 26:
+                        material = caracteres[security]
+                        Contrasinal.generated_password = Contrasinal.create_password(
+                            material, length
+                        )
+                        Contrasinal.material = material
+                        Contrasinal.length = length
+                        Contrasinal.name = name
 
-                else:
+                        clean()
+                        b_menu.grid(row=0, column=0, padx=25, pady=25)
+
+                        l_add0 = tk.Label(ventana, text="").grid(
+                            row=1, column=1, pady=2
+                        )
+                        l_add1 = tk.Label(
+                            ventana,
+                            text=f"O contrasinal xerado é {Contrasinal.generated_password}",
+                        )
+                        l_add1.grid(row=2, column=1, columnspan=2, pady=5, padx=10)
+
+                        b_add1 = tk.Button(
+                            ventana,
+                            text="Confirmar contrasinal",
+                            command=Contrasinal.confirm,
+                        )
+                        b_add1.grid(row=3, column=1, pady=3, padx=1)
+                        b_add2 = tk.Button(
+                            ventana,
+                            text="Xerar unha nova",
+                            command=Contrasinal.create_loop,
+                        )
+                        b_add2.grid(row=3, column=2, pady=3, padx=1)
+
+                    else:
+                        clean()
+                        l_e1 = tk.Label(ventana, text="").pack()
+                        l_e2 = tk.Label(
+                            ventana, text="A lonxitude debe ser maior ca 0 e máximo 25"
+                        ).pack()
+                        b_menu.pack()
+
+                except ValueError:
                     clean()
                     l_e1 = tk.Label(ventana, text="").pack()
                     l_e2 = tk.Label(
-                        ventana, text="A lonxitude debe ser maior ca 0 e máximo 25"
+                        ventana, text="Escriba un número enteiro na lonxitude"
                     ).pack()
                     b_menu.pack()
-
-            except ValueError:
-                clean()
-                l_e1 = tk.Label(ventana, text="").pack()
-                l_e2 = tk.Label(
-                    ventana, text="Escriba un número enteiro na lonxitude"
-                ).pack()
-                b_menu.pack()
 
     # Parte 3: Método por si o usuario quere cambiar o contrasinal coas mesmas especificacións
     @staticmethod
