@@ -26,14 +26,14 @@ def b_to_d(num):
         if x == "1":
             x = 2**index
 
-        result = result + x
+        result = int(result) + int(x)
     print(result)
 
 
 def main():
     while True:
         print(
-            "\nWhat do you wanna do?\n1. Decimal to binary\n2. Binary to decimal\nAnything else. Exit"
+            "\nWhat do you wanna do?\n1. Decimal to binary\n2. Binary to decimal\nOther number. Exit"
         )
         try:
             choice = int(input("\n"))
